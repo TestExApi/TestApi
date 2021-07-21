@@ -59,7 +59,7 @@
                                         <img th:src="${item.owner.profileImage}" alt="" width="32" height="32"/></div>
                             </div>
                             <div class="user-details">
-                                <a  th:url="${item.owner.link}"> <span th:utext="${item.owner.displayName}"> </span> </a>
+                                <a  th:href="${item.owner.link}"> <span th:utext="${item.owner.displayName}"> </span> </a>
                                 <div class="-flair"></div>
                             </div>
                         </div>
