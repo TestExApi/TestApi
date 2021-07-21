@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head lang="ru">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Shared/stacks.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/stackoverflow/secondary.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/stackoverflow/primary.css"/>
+    <style>
+        .bold {
+            font-weight: bold ;
+        }
+        pre {
+            background-color: darkgray;
+            margin-left: 10px;
+            margin-right: 10px;
+
+        }
+    </style>
+
+</head>
+<body style="margin-left: 40px">
+
+<form method="get" action="/search" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td><input type="text" name="intitle" id="intitle" th:value="${intitle}"/></td>
+            <span class="cfb"></span><span th:text="${errors}"></span><br/>
+        </tr>
+    </table>
+    <input type="submit" value="Search" />
+</form>
+<hr/>
+
+<table width="90%">
+    <tr th:each="item : ${questions}" >
+        <td>
+            <hr/>
+
+            <div class="question-summary" >
+
+                <div class="stats">
+                    <div th:if="${item.isAnswered}"  class="status answered">
+                        <strong th:utext="${item.answerCount}"></strong> answers
+                    </div>
+                    <div th:if="${!item.isAnswered}"  class="status unanswered">
+                        <strong th:utext="${item.answerCount}"> </strong>answers
+                    </div>
+                </div>
+
+                <div class="summary">
+                    <h3><a  th:href="${item.link}" class="question-hyperlink"> <span class="bold" th:utext="${item.title}"></span> </a></h3>
+                    <div class="started fr">
+                        <div class="user-info ">
+                            <div class="user-action-time">
+                                asked at <span th:utext="${item.creationDate}"
+                                               class="relativetime"> <span th:utext="${item.creationDate}"></span> </span>
+                            </div>
+                            <div class="user-gravatar32">
+                                    <div class="gravatar-wrapper-32" th:icon="${item.owner.profileImage}">
+                                        <img th:src="${item.owner.profileImage}" alt="" width="32" height="32"/></div>
+                            </div>
+                            <div class="user-details">
+                                <a  th:url="${item.owner.link}"> <span th:utext="${item.owner.displayName}"> </span> </a>
+                                <div class="-flair"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
